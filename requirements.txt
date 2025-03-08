@@ -2,8 +2,8 @@ fastapi==0.95.1
 uvicorn==0.22.0
 pydantic==1.10.7
 xgboost==1.7.5
-pandas==1.5.3 
-numpy
-shap==0.40.0 
+numpy==1.23.5
+pandas==1.5.3
+shap==0.41.0
 jinja2==3.1.2
 python-multipart==0.0.6
