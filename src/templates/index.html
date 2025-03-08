@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retention.AI - Early Churn Prediction</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Retention.AI</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="#predict" class="active">Try It Now</a>
+             
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Stop Customer Churn Before It Happens</h1>
+                    <p>Our AI-powered prediction model identifies customers at risk with 80% accuracy, giving you time to act and save relationships that matter.</p>
+                    
+                    <p class="visualization-caption">Visualize Churn Risk in Real-time</p>
+                    <div class="insight-cards">
+                        <div class="card high-risk">
+                            <div class="card-header">
+                                <div class="customer-id">ID: 7512-KTCYU</div>
+                                <div class="risk-indicator">High Risk</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <span class="label">Tenure:</span>
+                                    <span class="value">2 months</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Monthly:</span>
+                                    <span class="value">$79.85</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Contract:</span>
+                                    <span class="value">Month-to-Month</span>
+                                </div>
+                                
+                                <div class="prediction">
+                                    <span class="prediction-label">Prediction:</span>
+                                    <span class="prediction-value churn">Churn</span>
+                                    <span class="confidence">95% confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card medium-risk">
+                            <div class="card-header">
+                                <div class="customer-id">ID: 4801-JZAZL</div>
+                                <div class="risk-indicator">Medium Risk</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <span class="label">Tenure:</span>
+                                    <span class="value">11 months</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Monthly:</span>
+                                    <span class="value">$91.65</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Contract:</span>
+                                    <span class="value">One Year</span>
+                                </div>
+                                
+                                <div class="prediction">
+                                    <span class="prediction-label">Prediction:</span>
+                                    <span class="prediction-value warning">Likely Churn</span>
+                                    <span class="confidence">78% confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card low-risk">
+                            <div class="card-header">
+                                <div class="customer-id">ID: 2186-QZECD</div>
+                                <div class="risk-indicator">Low Risk</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="metric">
+                                    <span class="label">Tenure:</span>
+                                    <span class="value">70 months</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Monthly:</span>
+                                    <span class="value">$65.30</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="label">Contract:</span>
+                                    <span class="value">Two Year</span>
+                                </div>
+                                
+                                <div class="prediction">
+                                    <span class="prediction-label">Prediction:</span>
+                                    <span class="prediction-value stay">No Churn</span>
+                                    <span class="confidence">91% confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        
+        <section  id="predict" class="prediction-tool">
+            <div class="container">
+                <h2>Try Our Prediction Tool</h2>
+                <p class="section-desc">Enter customer details to get an instant churn prediction</p>
+                
+                <form action="/predict" method="post" class="prediction-form">
+                    <div class="form-columns">
+                        <div class="form-column">
+                            <h3>Customer Profile</h3>
+                            
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="" selected disabled>Select gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="SeniorCitizen">Senior Citizen</label>
+                                <select id="SeniorCitizen" name="SeniorCitizen" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Partner">Partner</label>
+                                <select id="Partner" name="Partner" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Dependents">Dependents</label>
+                                <select id="Dependents" name="Dependents" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="tenure">Tenure (months)</label>
+                                <input type="number" id="tenure" name="tenure" placeholder="Enter months" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="MonthlyCharges">Monthly Charges ($)</label>
+                                <input type="number" step="0.01" id="MonthlyCharges" name="MonthlyCharges" placeholder="0.00" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="TotalCharges">Total Charges ($)</label>
+                                <input type="number" step="0.01" id="TotalCharges" name="TotalCharges" placeholder="0.00" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-column">
+                            <h3>Services</h3>
+                            
+                            <div class="form-group">
+                                <label for="PhoneService">Phone Service</label>
+                                <select id="PhoneService" name="PhoneService" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="MultipleLines">Multiple Lines</label>
+                                <select id="MultipleLines" name="MultipleLines" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="InternetService_Fiber_optic">Fiber Optic Internet</label>
+                                <select id="InternetService_Fiber_optic" name="InternetService_Fiber_optic" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="InternetService_No">No Internet Service</label>
+                                <select id="InternetService_No" name="InternetService_No" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="OnlineSecurity">Online Security</label>
+                                <select id="OnlineSecurity" name="OnlineSecurity" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="OnlineBackup">Online Backup</label>
+                                <select id="OnlineBackup" name="OnlineBackup" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="DeviceProtection">Device Protection</label>
+                                <select id="DeviceProtection" name="DeviceProtection" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="TechSupport">Tech Support</label>
+                                <select id="TechSupport" name="TechSupport"  required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-column">
+                            <h3>Additional Features</h3>
+                            
+                            <div class="form-group">
+                                <label for="StreamingTV">Streaming TV</label>
+                                <select id="StreamingTV" name="StreamingTV" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="StreamingMovies">Streaming Movies</label>
+                                <select id="StreamingMovies" name="StreamingMovies"     required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Contract_One_year">One Year Contract</label>
+                                <select id="Contract_One_year" name="Contract_One_year"     required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="Contract_Two_year">Two Year Contract</label>
+                                <select id="Contract_Two_year" name="Contract_Two_year" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="PaperlessBilling">Paperless Billing</label>
+                                <select id="PaperlessBilling" name="PaperlessBilling" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="PaymentMethod_Credit_card_automatic">Credit Card (Automatic)</label>
+                                <select id="PaymentMethod_Credit_card_automatic" name="PaymentMethod_Credit_card_automatic" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="PaymentMethod_Electronic_check">Electronic Check</label>
+                                <select id="PaymentMethod_Electronic_check" name="PaymentMethod_Electronic_check" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="PaymentMethod_Mailed_check">Mailed Check</label>
+                                <select id="PaymentMethod_Mailed_check" name="PaymentMethod_Mailed_check" required>
+                                    <option value="" selected disabled>Select option</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        <button type="submit" class="btn btn-primary">Predict Churn</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Retention.AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

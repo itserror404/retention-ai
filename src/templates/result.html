@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retention.AI - Prediction Result</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Retention.AI</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="index.html/#predict" class="active">Try It Now</a>
+          
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+
+      
+
+        
+        <section class="result-section">
+            <div class="container">
+                <h1>Prediction Result</h1>
+                
+                <div class="result-card {{ 'high-risk' if result['churn_prediction'] == 'Churn' else 'low-risk' }}">
+                    <div class="result-header">
+                        <div class="prediction-badge {{ 'churn' if result['churn_prediction'] == 'Churn' else 'stay' }}">
+                            {{ result["churn_prediction"] }}
+                        </div>
+                        <div class="probability">
+                            <span class="probability-label">Probability:</span>
+                            {% if result["churn_prediction"] == "Churn" %}
+                                <span class="probability-value">{{ result["churn_probability"] * 100 }}%</span>
+                            {% else %}
+                                
+                                <span class="probability-value"> {{ (1 - result["churn_probability"]) * 100 }}%</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                    
+
+                        <div class="result-body">
+                            <h2>Top Influencing Factors</h2>
+                            <p class="insight-text">These factors had the most significant impact on this prediction</p>
+                        
+                            <div class="factors-list">
+                                {% for feature, importance in result["explanation"].items() %}
+                                    <div class="factor-item">
+                                        <div class="factor-name">{{ feature }}</div>
+                                        <div class="factor-bar-container">
+                                            <div class="factor-bar" style="width: {{ (importance|float) * 100 }}%; background-color: {% if importance >= 0 %} #ff4d4d {% else %} #2ecc71 {% endif %};"></div>
+                                        </div>
+                                        <div class="factor-value {% if importance >= 0 %} positive {% else %} negative {% endif %}">
+                                            {% if importance >= 0 %}
+                                                ▲ <span>{{ importance }}</span>
+                                            {% else %}
+                                                ▼ <span>{{ importance }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        
+                            <!-- GUIDE SECTION -->
+                            <div class="guide-section">
+                                <h3>📖 How to Read This Report</h3>
+                                <p>Each factor has a number and an arrow. Here’s how to understand them:</p>
+                        
+                                <div class="guide-box">
+                                    <div class="guide-item">
+                                        <span class="guide-arrow red">▲ Positive Number</span>
+                                        <span class="guide-text">Increases churn risk</span>
+                                    </div>
+                                    <div class="guide-item">
+                                        <span class="guide-arrow green">▼ Negative Number</span>
+                                        <span class="guide-text">Decreases churn risk</span>
+                                    </div>
+                                    <div class="guide-item">
+                                        <span class="guide-arrow red">▲ Large Positive Number</span>
+                                        <span class="guide-text">Strong churn factor</span>
+                                    </div>
+                                    <div class="guide-item">
+                                        <span class="guide-arrow green">▼ Large Negative Number</span>
+                                        <span class="guide-text">Strong retention factor</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        
+                       
+                        
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <div class="customer-data-summary">
+            <h2>Customer Data Used</h2>
+            <p class="insight-text">The following information was used to generate this prediction</p>
+            
+            <div class="data-columns">
+                <div class="data-column">
+                    <h3>Customer Profile</h3>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Gender:</span>
+                        <span class="data-value">{{ "Male" if result["gender"] == 1 else "Female" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Senior Citizen:</span>
+                        <span class="data-value">{{ "Yes" if result["SeniorCitizen"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Partner:</span>
+                        <span class="data-value">{{ "Yes" if result["Partner"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Dependents:</span>
+                        <span class="data-value">{{ "Yes" if result["Dependents"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Tenure:</span>
+                        <span class="data-value">{{ result["tenure"] }} months</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Monthly Charges:</span>
+                        <span class="data-value">${{ result["MonthlyCharges"] }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Total Charges:</span>
+                        <span class="data-value">${{ result["TotalCharges"] }}</span>
+                    </div>
+                </div>
+                
+                <div class="data-column">
+                    <h3>Services</h3>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Phone Service:</span>
+                        <span class="data-value">{{ "Yes" if result["PhoneService"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Multiple Lines:</span>
+                        <span class="data-value">{{ "Yes" if result["MultipleLines"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Fiber Optic Internet:</span>
+                        <span class="data-value">{{ "Yes" if result["InternetService_Fiber_optic"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">No Internet Service:</span>
+                        <span class="data-value">{{ "Yes" if result["InternetService_No"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Online Security:</span>
+                        <span class="data-value">{{ "Yes" if result["OnlineSecurity"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Online Backup:</span>
+                        <span class="data-value">{{ "Yes" if result["OnlineBackup"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Device Protection:</span>
+                        <span class="data-value">{{ "Yes" if result["DeviceProtection"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Tech Support:</span>
+                        <span class="data-value">{{ "Yes" if result["TechSupport"] == 1 else "No" }}</span>
+                    </div>
+                </div>
+                
+                <div class="data-column">
+                    <h3>Additional Features</h3>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Streaming TV:</span>
+                        <span class="data-value">{{ "Yes" if result["StreamingTV"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Streaming Movies:</span>
+                        <span class="data-value">{{ "Yes" if result["StreamingMovies"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">One Year Contract:</span>
+                        <span class="data-value">{{ "Yes" if result["Contract_One_year"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Two Year Contract:</span>
+                        <span class="data-value">{{ "Yes" if result["Contract_Two_year"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Paperless Billing:</span>
+                        <span class="data-value">{{ "Yes" if result["PaperlessBilling"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Credit Card (Auto):</span>
+                        <span class="data-value">{{ "Yes" if result["PaymentMethod_Credit_card_automatic"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Electronic Check:</span>
+                        <span class="data-value">{{ "Yes" if result["PaymentMethod_Electronic_check"] == 1 else "No" }}</span>
+                    </div>
+                    
+                    <div class="data-item">
+                        <span class="data-label">Mailed Check:</span>
+                        <span class="data-value">{{ "Yes" if result["PaymentMethod_Mailed_check"] == 1 else "No" }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <a href="/" class="btn btn-secondary">New Prediction</a>
+            <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Retention.AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
