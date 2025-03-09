@@ -29,8 +29,8 @@ y_demo.to_csv("demo_y.csv", index=False)
 ratio = df["Churn"].value_counts()[0] / df["Churn"].value_counts()[1]
 # model = xgb.XGBClassifier(eval_metric='logloss', scale_pos_weight=ratio)
 
-model = model = xgb.XGBClassifier(use_label_encoder=False, eval_metric="logloss")
-
+model = xgb.XGBClassifier(eval_metric='logloss', scale_pos_weight=0.8 * ratio, 
+                          max_depth=6, learning_rate=0.01,n_estimators=300)
 
 model.fit(X_train, y_train)
 
@@ -40,13 +40,13 @@ accuracy= accuracy_score(y_test, y_pred)
 print(f"Model Accuracy: {accuracy:.4f}")
 print("Classification Report:\n", classification_report(y_test, y_pred))
 
-""" 
+
 import matplotlib.pyplot as plt
 importances = model.feature_importances_
 plt.barh(X_train.columns, importances)
 plt.xlabel("Feature Importance")
 plt.ylabel("Features")
-plt.show() """
+plt.show() 
 
 importances = model.feature_importances_
 
